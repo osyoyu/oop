@@ -1,9 +1,9 @@
 <?php
 
-function render($action, $layout, $vars)
+function render($action, $vars, $layout)
 {
   if (isset($layout))
   {
-    include(dirname(__FILE__) . "/views/" . $layout . ".php");
+    include(APP_PATH . "/app/views/" . $layout . ".php");
   }
 }
