@@ -17,6 +17,26 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
   - 普通に PHP にアクセスする以外の方法はないので頑張ってください
   - 階層構造を作りたいなら普通にディレクトリを掘るだけでOKですが、試したことはないです
 
+## 例
+```
+/
+├── oop ( ← このリポジトリを submodule とかしたもの )
+│
+├── app
+│   ├── config.php
+│   ├── models
+│   │   └── Posts.php
+│   └── views
+│       ├── index.php
+│       ├── layout.php
+│       ├── partials
+│       └── posts.php
+├── js
+├── css
+├
+├── index.php
+└── posts.php ( コントローラー )
+
 
 ## ライセンス
 GPLv3
