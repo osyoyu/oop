@@ -22,20 +22,21 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
 /
 ├── oop ( ← このリポジトリを submodule とかしたもの )
 │
+│ # ここより下は全部自分で作る
+│
 ├── app
-│   ├── config.php
-│   ├── models
-│   │   └── Posts.php
-│   └── views
+│   ├── config.php ( 初期化処理を書きたかったらここに書くと実行される )
+│   ├── models ( Model を置くところ )
+│   │   └── Posts.php ( BaseModel を継承したクラスを置くと良いぞ )
+│   └── views  ( View を置くところ )
 │       ├── index.php
 │       ├── layout.php
-│       ├── partials
 │       └── posts.php
 ├── js
 ├── css
-├
+│
 ├── index.php
-└── posts.php ( コントローラー )
+└── posts.php ( Controller )
 ```
 
 ## ライセンス
