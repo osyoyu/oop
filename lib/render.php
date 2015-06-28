@@ -1,8 +1,12 @@
 <?php
 
-function render($action, $vars, $layout)
+function render($action, $layout = "", $vars = array())
 {
-  if (isset($layout))
+  if (empty($layout))
+  {
+    include(APP_PATH . "/app/views/" . $action. ".php");
+  }
+  else
   {
     include(APP_PATH . "/app/views/" . $layout . ".php");
   }
