@@ -1,6 +1,6 @@
 <?php
 
-require_once("app/models/BaseModel.php");
+require_once("./BaseModel.php");
 
 function load_model($model_name)
 {
