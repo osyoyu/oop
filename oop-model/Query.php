@@ -1,32 +1,44 @@
 <?php
 
-class QueryObject
+class Query
 {
-
   function __construct($table)
   {
-    $sql = "";
-    $clauses = [];
-    $placeholders = [];
+    $this->table = $table;
+    $this->clauses = [];
+    $this->placeholders = [];
   }
 
   function find($attrs)
   {
-    if (!is_associative_array($attrs)) { throw new InvalidArgumentException(); }
+    if (!is_assoc($attrs)) { throw new InvalidArgumentException(); }
   }
 
-  function where($args)
+  function where($attrs)
   {
-    if (!is_associative_array($attrs)) { throw new InvalidArgumentException(); }
+    if (!is_assoc($attrs)) { throw new InvalidArgumentException(); }
 
-    foreach ($args as $key => $value)
+    $wheres = [];
+
+    foreach ($attrs as $key => $value)
     {
-
+      $hashed_key = md5("where-" . $key);
+      $wheres[]   = $key . " = " . ":" . $hashed_key;
+      $this->placeholders[$hashed_key] = $value;
     }
+
+    $this->clauses["where"] = "WHERE " . implode(" AND ", $wheres);
+
+    return $this;
   }
 
+  /**
+   * SQLを組み立てほげふが
+   */
   function call()
   {
-    # 実際に RDB にリクエストを飛ばす
+    $sql = "SELECT * FROM " . $this->table . " " . implode(" ", $this->clauses) . ";";
+    var_dump($sql);
+    var_dump($this->placeholders);
   }
 }

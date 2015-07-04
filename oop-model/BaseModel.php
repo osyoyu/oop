@@ -15,9 +15,9 @@ class BaseModel {
    *
    * return Query
    */
-  function query()
+  static function query()
   {
-    return new Query(get_class(self));
+    return new Query(get_called_class());
   }
 
   /**
@@ -25,9 +25,9 @@ class BaseModel {
    *
    * return Query
    */
-  function q()
+  static function q()
   {
-    return query();
+    return self::query();
   }
 
 }

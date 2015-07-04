@@ -1,10 +1,11 @@
 <?php
 
 require_once(dirname(__FILE__) . "/BaseModel.php");
+require_once(dirname(__FILE__) . "/Query.php");
 
 function load_model($model_name)
 {
-  $path = Config::$app_path . "/app/models/" . $model_name . ".php";
+  $path = Config::read("app_path") . "/app/models/" . $model_name . ".php";
   require_once($path);
 }
 
