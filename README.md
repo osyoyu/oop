@@ -3,12 +3,18 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
 
 学校の課題とかでちょっとしたWebアプリケーションをPHPで作らなければならなくなった際に少し便利なMVCもどきフレームワークです。
 
-## 使い方
-* `git submodule` とかでアプリケーションのルートあたりに `oop` を持ってくる
+## あるもの、ないもの
+* Controller - ない
+* Model - `/oop-model`以下にそれっぽいものがある
+* View - 申し訳程度にある (`render()`)
+
+
+## Getting Started
+* `git submodule https://github.com/osyoyu/oop bin` とかでアプリケーションのルートあたりに `bin` を持ってくる
+* サーバーの設定で `/bin` 以下へのアクセスを弾くと良いと思います
 * いわゆるコントローラーは `/` に全部平置きする
-* コントローラーの頭で `require_once("./oop/oop.php");` みたいな感じで読み込む
-  - 相対パスなのは、いわゆる大学の環境だと `/~yourname/` 以下にしかファイルを置けない、みたいなことがある気がするからです
-  - `APP_ROOT` という定数が define されるのでここ以外ではそれを使うと良いです
+* コントローラーの頭で `require_once(dirname(__FILE__) . "/bin/oop.php");` みたいな感じで読み込む
+  - `Config` クラスが自動的に定義され、`Config.read('app_root')` でアプリケーションのルートへのパスが返ってくるので、以後はそちらを使うと良いと思います
 * コントローラーの終わりで `render("view_name", ビューに渡したい連想配列, "layout_name")` みたいにします (layout は省略可能)
 
 
@@ -17,27 +23,9 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
   - 普通に PHP にアクセスする以外の方法はないので頑張ってください
   - 階層構造を作りたいなら普通にディレクトリを掘るだけでOKですが、試したことはないです
 
+
 ## 例
-```
-/
-├── oop ( ← このリポジトリを submodule とかしたもの )
-│
-│ # ここより下は全部自分で作る
-│
-├── app
-│   ├── config.php ( 初期化処理を書きたかったらここに書くと実行される )
-│   ├── models ( Model を置くところ )
-│   │   └── Posts.php ( BaseModel を継承したクラスを置くと良いぞ )
-│   └── views  ( View を置くところ )
-│       ├── index.php
-│       ├── layout.php
-│       └── posts.php
-├── js
-├── css
-│
-├── index.php
-└── posts.php ( Controller )
-```
+(https://github.com/osyoyu/oop-app)
 
 ## ライセンス
 GPLv3
