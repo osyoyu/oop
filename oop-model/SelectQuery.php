@@ -51,16 +51,9 @@ class SelectQuery
   {
     global $db;
 
-    try
-    {
-      $statement = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-      $statement->execute($placeholders);
-      $results = $statement->fetchAll(PDO::FETCH_CLASS, $this->table);
-      return $results;
-    }
-    catch (Exception $e)
-    {
-      return false;
-    }
+    $statement = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    $statement->execute($placeholders);
+    $results = $statement->fetchAll(PDO::FETCH_CLASS, $this->table);
+    return $results;
   }
 }
