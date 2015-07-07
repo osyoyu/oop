@@ -41,10 +41,20 @@ class SelectQuery
 
     $sql = "SELECT * FROM " . $this->table . " " . implode(" ", $this->clauses) . ";";
 
+    return $this->raw($sql, $this->placeholders);
+  }
+
+  /**
+   * Do a raw query on the database: unrecommended
+   */
+  function raw($sql, $placeholders)
+  {
+    global $db;
+
     try
     {
       $statement = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-      $statement->execute($this->placeholders);
+      $statement->execute($placeholders);
       $results = $statement->fetchAll(PDO::FETCH_CLASS, $this->table);
       return $results;
     }
