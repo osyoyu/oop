@@ -3,28 +3,22 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
 
 学校の課題とかでちょっとしたWebアプリケーションをPHPで作らなければならなくなった際に少し便利なMVCもどきフレームワークです。
 
+
 ## あるもの、ないもの
-* Controller - ない
-* Model - `/oop-model`以下にそれっぽいものがある
-* View - 申し訳程度にある (`render()`)
+* Controller - Controller と呼べるものはない。普通に PHP ファイルを配置して、それぞれで `oop.php` を読み込んでもらう形になる（後述）。
+* Model - `/oop-model` 以下にそれっぽいものがある
+* View - 申し訳程度にある ( `render()` )
 
 
 ## Getting Started
 * `git submodule https://github.com/osyoyu/oop bin` とかでアプリケーションのルートあたりに `bin` を持ってくる
-* サーバーの設定で `/bin` 以下へのアクセスを弾くと良いと思います
+* サーバーの設定で `/bin` 以下へのアクセスを弾くと良い
 * いわゆるコントローラーは `/` に全部平置きする
 * コントローラーの頭で `require_once(dirname(__FILE__) . "/bin/oop.php");` みたいな感じで読み込む
-  - `Config` クラスが自動的に定義され、`Config.read('app_root')` でアプリケーションのルートへのパスが返ってくるので、以後はそちらを使うと良いと思います
-* コントローラーの終わりで `render("view_name", $binding)` を呼ぶと出力が開始されます
-  - `/app/view/layout.php` があると自動的に layout として適用されます
-  - `$binding` は View を担う PHP ファイルに渡したい(配列)変数です。View 側からは `$binding` でアクセスできます
-
-
-## できないこと
-* ルーティング
-  - 普通に PHP にアクセスする以外の方法はないので頑張ってください
-  - 階層構造を作りたいなら普通にディレクトリを掘るだけでOKですが、試したことはないです
-  - 実装するつもりは少しありますが、課題だと直接 PHP ファイルを叩く、みたいなケースが多いのでしないかもしれません
+  - `Config` クラスが自動的に定義され、`Config.read('app_root')` でアプリケーションのルートへのパスが返ってくるので、以後はそちらを使うと良い
+* コントローラーの終わりで `render("view_name", $binding)` を呼ぶと出力が開始される
+  - `/app/view/layout.php` があると自動的に layout として適用される
+  - `$binding` は View を担う PHP ファイルに渡したい(配列)変数です。View 側からは `$binding` でアクセスできる
 
 
 ## 命名規則
