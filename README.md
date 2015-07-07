@@ -27,6 +27,10 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
   - 実装するつもりは少しありますが、課題だと直接 PHP ファイルを叩く、みたいなケースが多いのでしないかもしれません
 
 
+## 命名規則
+だいたい Rails と同じですが、DB のテーブル名は単数形です。
+
+
 ## OOP-Model
 DBは `app_root` 直下の `db.sqlite3` 決め打ちになります。以下は Item テーブルへの操作の例です
 
@@ -41,11 +45,14 @@ class Item extends BaseModel {
 ```
 
 ### SELECT
+Model に対して `query()` を呼ぶことで `SelectQuery` オブジェクトが生成され、`where()` や `order_by()` (未実装) をチェーンできます。
+`call()` を呼ぶことで実際にDBへのクエリが行われ、最初に呼んだ Model 型のオブジェクトの配列が返ります。ActiveRecord みたいな遅延呼び出し的な機構はありません。
+
 * `Item::query()->where(["name" => "hoge"])->call();`
-* `Item::query()->where("name LIKE :name AND price < 3000", ["name" => "%プリパラ%"]);` ( **未実装** )
+* `Item::query()->where("name LIKE :name AND price < 3000", ["name" => "%プリパラ%"])->call();` ( **未実装** )
 
 ### INSERT
-`Item::create(["name" => "プリパス アイドルリンク", "price" => 6250]);`
+* `Item::create(["name" => "プリパス アイドルリンク", "price" => 6250]);`
 
 
 ## 例
