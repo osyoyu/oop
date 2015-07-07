@@ -22,8 +22,8 @@ class Query
 
     foreach ($attrs as $key => $value)
     {
-      $hashed_key = md5("where-" . $key);
-      $wheres[]   = $key . " = " . ":" . $hashed_key;
+      $hashed_key = ":" . md5("where-" . $key);
+      $wheres[]   = $key . " = " . $hashed_key;
       $this->placeholders[$hashed_key] = $value;
     }
 
@@ -37,8 +37,21 @@ class Query
    */
   function call()
   {
+    global $db;
+
     $sql = "SELECT * FROM " . $this->table . " " . implode(" ", $this->clauses) . ";";
     var_dump($sql);
     var_dump($this->placeholders);
+
+    try
+    {
+      $statement = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+      $statement->execute($this->placeholders);
+      var_dump($statement->fetchAll());
+    }
+    catch (Exception $e)
+    {
+      return false;
+    }
   }
 }
