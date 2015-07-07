@@ -51,9 +51,12 @@ class SelectQuery
   {
     global $db;
 
+    $db->beginTransaction();
     $statement = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
     $statement->execute($placeholders);
     $results = $statement->fetchAll(PDO::FETCH_CLASS, $this->table);
+    $db->commit();
+
     return $results;
   }
 }
