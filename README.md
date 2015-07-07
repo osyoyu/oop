@@ -24,8 +24,15 @@ OreOrePHP - Yet Another オレオレPHPフレームワーク
   - 階層構造を作りたいなら普通にディレクトリを掘るだけでOKですが、試したことはないです
 
 
+## OOP-Model
+DBは `app_root` 直下の `db.sqlite3` 決め打ちになります
+
+### SELECT
+`Item::query()->where(["name" => "hoge"])->call();`
+
+
 ## 例
-(https://github.com/osyoyu/oop-app)
+https://github.com/osyoyu/oop-app
 
 ## ライセンス
 GPLv3
