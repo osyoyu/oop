@@ -40,14 +40,13 @@ class Query
     global $db;
 
     $sql = "SELECT * FROM " . $this->table . " " . implode(" ", $this->clauses) . ";";
-    var_dump($sql);
-    var_dump($this->placeholders);
 
     try
     {
       $statement = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
       $statement->execute($this->placeholders);
-      var_dump($statement->fetchAll());
+      $results = $statement->fetchAll(PDO::FETCH_CLASS, $this->table);
+      return $results;
     }
     catch (Exception $e)
     {
