@@ -1,13 +1,13 @@
 <?php
 
-function render($action, $layout = "", $vars = array())
+function render($action, $binding = array())
 {
-  if (empty($layout))
+  if (file_exists(Config::read("app_path") . "/app/views/layout.php"))
   {
-    include(APP_PATH . "/app/views/" . $action. ".php");
+    include(Config::read("app_path") . "/app/views/layout.php");
   }
   else
   {
-    include(APP_PATH . "/app/views/" . $layout . ".php");
+    include(Config::read("app_path") . "/app/views/" . $action. ".php");
   }
 }
