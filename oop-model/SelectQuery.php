@@ -1,6 +1,6 @@
 <?php
 
-class Query
+class SelectQuery
 {
   function __construct($table)
   {

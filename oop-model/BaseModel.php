@@ -9,7 +9,7 @@ abstract class BaseModel {
    */
   static function query()
   {
-    return new Query(get_called_class());
+    return new SelectQuery(get_called_class());
   }
 
   /**
