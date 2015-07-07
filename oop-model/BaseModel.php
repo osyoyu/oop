@@ -1,14 +1,6 @@
 <?php
 
-class BaseModel {
-
-  /**
-   * Disallow instancing of BaseModel.
-   */
-  private function __construct()
-  {
-    throw RuntimeException("You should not create a instance of BaseModel.");
-  }
+abstract class BaseModel {
 
   /**
    * Returns a Query for this class.
@@ -28,6 +20,11 @@ class BaseModel {
   static function q()
   {
     return self::query();
+  }
+
+
+  function __construct()
+  {
   }
 
 }
